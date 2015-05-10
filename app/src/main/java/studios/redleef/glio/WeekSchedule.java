@@ -92,9 +92,35 @@ public class WeekSchedule extends ActionBarActivity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
+
+        //Home Selected
+        if(position == 0) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, new WeekListFragment())
+                    .commit();
+        }
+        else if(position == 1)
+        {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, new RecipeListFragment())
+                    .commit();
+        }
+
+        //Shopping Ingredients Selected
+        else if(position == 2)
+        {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, new RecipeListFragment())
+                    .commit();
+        }
+        //Setting Selected
+        else if(position == 3)
+        {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, new SettingsFragment())
+                    .commit();
+        }
+
     }
 
     public void onSectionAttached(int number) {
@@ -179,34 +205,7 @@ public class WeekSchedule extends ActionBarActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
 
-            Bundle savedArgs = getArguments();
-            int sectionNum = savedArgs.getInt(ARG_SECTION_NUMBER);
             int layoutNum = R.layout.fragment_week_schedule;
-
-            //=====================CHOOSE FRAGMENT TO REPLACE ONCE WE GET THE SECTION NUMBER-=========
-            /*
-             Home - 1
-             Recipe List - 2
-             Shopping List - 3
-             Settings - 4
-             */
-
-            if(sectionNum == 1)
-            {
-                layoutNum = R.layout.fragment_week_schedule;
-            }
-            else if(sectionNum == 2)
-            {
-                layoutNum = R.layout.fragment_recipe_list;
-            }
-            else if(sectionNum == 3)
-            {
-                layoutNum = R.layout.fragment_shopping_list;
-            }
-            else if(sectionNum == 4)
-            {
-                layoutNum = R.layout.fragment_settings;
-            }
 
             View rootView = inflater.inflate(layoutNum, container, false);
             return rootView;

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:id="@+id/day_item_image"
+        android:adjustViewBounds="true"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="#33CC00"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_alignTop="@+id/day_item_image"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout"></LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        android:text="Monday"
+        android:textColor="#000000"
+        android:id="@+id/day_item_title"
+        android:fontFamily="sans-serif-thin"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:background="#8CFFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="Breakfast"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/day_item_breakfast"
+        android:layout_below="@+id/day_item_title" />
+
+    <TextView
+        android:background="#8CFFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="Lunch"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/day_item_lunch"
+        android:layout_below="@+id/day_item_breakfast" />
+
+    <TextView
+        android:background="#8CFFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="30dp"
+        android:paddingLeft="10dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="Dinner"
+        android:id="@+id/day_item_dinner"
+        android:layout_below="@+id/day_item_lunch" />
+
+</RelativeLayout>

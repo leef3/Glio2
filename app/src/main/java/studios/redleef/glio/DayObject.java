@@ -8,15 +8,19 @@ import java.util.ArrayList;
 public class DayObject {
 
     private String name;
+    private int image;
     private ArrayList<MealObject> mealList;
 
-    public DayObject(String newName)
+    public DayObject(String newName, int newImage)
     {
         name = newName;
+        image = newImage;
         mealList = new ArrayList<MealObject>();
     }
     //Getter Methods
     public String getName() {return name;}
+
+    public int getImage() {return image;}
 
     public ArrayList<MealObject> getList() {return mealList;}
 
