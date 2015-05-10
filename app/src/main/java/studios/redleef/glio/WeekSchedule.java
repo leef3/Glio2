@@ -1,6 +1,7 @@
 package studios.redleef.glio;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+//GSON Serializable Data
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+
 
 public class WeekSchedule extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -28,7 +38,7 @@ public class WeekSchedule extends ActionBarActivity
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
     /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
+     * Used to store the last screen title. For use in {@liunk #restoreActionBar()}.
      */
     private CharSequence mTitle;
 
@@ -45,6 +55,37 @@ public class WeekSchedule extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+    }
+
+    void loadData() {
+        /*
+        SharedPreferences settings = this.getPreferences(MODE_PRIVATE);
+        String objectData = settings.getString(EMPLOYEE_SAVE_NAME, "");
+        if (!objectData.equals("")) {
+            System.out.println("Object Data: " + objectData);
+            Gson gson = new Gson();
+            Type collectionType = new TypeToken<ArrayList<Employee>>() {
+            }.getType();
+            JsonArray jArray = new JsonParser().parse(objectData).getAsJsonArray();
+            for (JsonElement e : jArray) {
+                Employee c = gson.fromJson(e, Employee.class);
+                employeeList.add(c);
+            }
+        }
+        */
+    }
+
+
+    @Override protected void onPause(){
+        super.onPause();
+
+        /*
+        SharedPreferences.Editor settings = this.getPreferences(MODE_PRIVATE).edit();
+        String data = new Gson().toJson(employeeList);
+        System.out.println("Data!: " + data);
+        settings.putString(EMPLOYEE_SAVE_NAME, data);
+        settings.commit();
+        */
     }
 
     @Override
@@ -66,6 +107,9 @@ public class WeekSchedule extends ActionBarActivity
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
+                break;
+            case 4:
+                mTitle = getString(R.string.title_section4);
                 break;
         }
     }
@@ -134,7 +178,37 @@ public class WeekSchedule extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_week_schedule, container, false);
+
+            Bundle savedArgs = getArguments();
+            int sectionNum = savedArgs.getInt(ARG_SECTION_NUMBER);
+            int layoutNum = R.layout.fragment_week_schedule;
+
+            //=====================CHOOSE FRAGMENT TO REPLACE ONCE WE GET THE SECTION NUMBER-=========
+            /*
+             Home - 1
+             Recipe List - 2
+             Shopping List - 3
+             Settings - 4
+             */
+
+            if(sectionNum == 1)
+            {
+                layoutNum = R.layout.fragment_week_schedule;
+            }
+            else if(sectionNum == 2)
+            {
+                layoutNum = R.layout.fragment_recipe_list;
+            }
+            else if(sectionNum == 3)
+            {
+                layoutNum = R.layout.fragment_shopping_list;
+            }
+            else if(sectionNum == 4)
+            {
+                layoutNum = R.layout.fragment_settings;
+            }
+
+            View rootView = inflater.inflate(layoutNum, container, false);
             return rootView;
         }
 
