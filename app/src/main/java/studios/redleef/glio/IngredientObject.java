@@ -5,8 +5,8 @@ package studios.redleef.glio;
  */
 public class IngredientObject {
 
-    private String name, scale;
-    private double amount;
+    private static String name, scale;
+    private static double amount;
 
     public IngredientObject(String newName, String newScale, double newAmount)
     {
@@ -16,8 +16,8 @@ public class IngredientObject {
     }
 
     //Getter Setter Methods
-    public String getName() {return name;}
-    public String getScale() {return scale;}
-    public double getAmount() {return amount;}
+    public static String getName() {return name;}
+    public static String getScale() {return scale;}
+    public static double getAmount() {return amount;}
 
 }

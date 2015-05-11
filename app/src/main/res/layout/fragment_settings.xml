@@ -12,7 +12,7 @@
         android:gravity="center"
         android:layout_margin="5dp"
         android:text="Settings"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:id="@+id/settings_title"
         android:layout_gravity="center_horizontal" />
 
@@ -31,9 +31,22 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:padding="10dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="15dp"
         android:text="@string/version_number"
         android:layout_gravity="center_horizontal" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_gravity="center_horizontal" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
 
     <LinearLayout
         android:orientation="vertical"
@@ -43,12 +56,13 @@
         android:layout_gravity="center_horizontal">
 
 
+
         <TextView
             android:layout_width="match_parent"
             android:padding="10dp"
             android:textColor="#A4A4A4"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:text="Information and Security"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal" />
@@ -64,7 +78,7 @@
         android:layout_width="match_parent"
         android:padding="10dp"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15dp"
         android:text="Send Bug Report"
         android:id="@+id/send_bug_report"
         android:layout_gravity="center_horizontal" />
@@ -74,7 +88,7 @@
         android:layout_width="match_parent"
         android:padding="10dp"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15dp"
         android:text="User Agreement"
         android:id="@+id/user_agreement"
         android:layout_gravity="center_horizontal" />
@@ -83,7 +97,7 @@
         android:layout_width="match_parent"
         android:padding="10dp"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15dp"
         android:text="Privacy Policy"
         android:id="@+id/privacy_policy"
         android:layout_gravity="center_horizontal" />
@@ -92,7 +106,7 @@
         android:layout_width="match_parent"
         android:padding="10dp"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15dp"
         android:text="Company Information"
         android:id="@+id/company_information"
         android:layout_gravity="center_horizontal" />
@@ -112,7 +126,7 @@
             android:padding="10dp"
             android:textColor="#A4A4A4"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:text="Help and Feedback"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal" />
@@ -128,7 +142,7 @@
             android:layout_width="match_parent"
             android:padding="10dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15dp"
             android:text="Help Center"
             android:id="@+id/help_center"
             android:layout_gravity="center_horizontal" />
@@ -137,7 +151,7 @@
             android:layout_width="match_parent"
             android:padding="10dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15dp"
             android:text="Send Feedback"
             android:id="@+id/send_feedback"
             android:layout_gravity="center_horizontal" />
@@ -147,7 +161,7 @@
             android:layout_width="match_parent"
             android:padding="10dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15dp"
             android:text="Rate Glio"
             android:id="@+id/rate_glio"
             android:layout_gravity="center_horizontal" />
@@ -166,7 +180,7 @@
             android:padding="10dp"
             android:textColor="#A4A4A4"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:text="Aesthetics"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal" />
@@ -182,7 +196,7 @@
             android:layout_width="match_parent"
             android:padding="10dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15dp"
             android:text="Color Scheme"
             android:id="@+id/color_scheme"
             android:layout_gravity="center_horizontal" />
@@ -191,7 +205,7 @@
             android:layout_width="match_parent"
             android:padding="10dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15dp"
             android:text="Font Size"
             android:id="@+id/font_size"
             android:layout_gravity="center_horizontal" />
@@ -199,9 +213,8 @@
 
 
     </LinearLayout>
+    </LinearLayout>
 
-
-
-
+</ScrollView>
 
 </LinearLayout>

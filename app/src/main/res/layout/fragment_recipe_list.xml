@@ -12,7 +12,7 @@
         android:gravity="center"
         android:layout_margin="5dp"
         android:text="Recipes"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:id="@+id/recipe_title"
         android:layout_gravity="center_horizontal" />
 

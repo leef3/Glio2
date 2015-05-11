@@ -93,7 +93,7 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerListView = (ListView) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
 
-        mDrawerListView.setBackgroundColor(Color.BLACK);
+        mDrawerListView.setBackgroundColor(Color.WHITE);
 
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

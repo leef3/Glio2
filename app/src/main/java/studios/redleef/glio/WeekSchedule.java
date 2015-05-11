@@ -2,6 +2,8 @@ package studios.redleef.glio;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -17,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 //GSON Serializable Data
@@ -42,6 +45,7 @@ public class WeekSchedule extends ActionBarActivity
      */
     private CharSequence mTitle;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +59,7 @@ public class WeekSchedule extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
     }
 
     void loadData() {
@@ -110,7 +115,7 @@ public class WeekSchedule extends ActionBarActivity
         else if(position == 2)
         {
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, new RecipeListFragment())
+                    .replace(R.id.container, new IngredientListFragment())
                     .commit();
         }
         //Setting Selected
