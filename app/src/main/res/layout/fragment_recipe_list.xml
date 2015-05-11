@@ -6,6 +6,23 @@
     android:paddingLeft="8dp"
     android:paddingRight="8dp">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:text="Recipes"
+        android:textSize="30dp"
+        android:id="@+id/recipe_title"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="#0B610B"
+        android:layout_height="2dp"
+        android:layout_gravity="center_horizontal"></LinearLayout>
+
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
