@@ -14,11 +14,12 @@ Bugs:
 Ingredients Checkbox Repeats, has to do with list loading
 
 Future (By Priority):
-Splash Screen
+Splash Screen (Will now be added to Intro Sequence)
 Add Recipe Dialog for Recipe List Add
 Add Recipe ListView Dialog for WeekSchedule
 Side Menu Spacing and Color
 Settings Fragment (Partially Done)
+Two / Three Sets of Image Backgrounds in Settings (Have paths stored in strings for certain sets)
 
 Far Future:
 Add Weeks Ingredient Compiler
