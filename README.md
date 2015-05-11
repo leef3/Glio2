@@ -2,10 +2,16 @@
 Grocery List Ingredient Organizer
 
 Functional:
-Week Schedule UI
+Week Schedule UI / Ingredients UI / Recipe UI / Settings UI
 List of Recipes
 
+Quick Adds:
+New BG for Day Objects 1050x600 ideal
+Text Titles for Breakfast Lunch Dinner
+Intro Sequence - Only for once new users save bool in Shared Pref (Tabbed Scroll to Right w/ Screenshots, Opacitiy 50% on square that almost fills screen. Background will be the veggies and Redleef. Button to go to next will say "Get Started")
 
+Bugs:
+Ingredients Checkbox Repeats, has to do with list loading
 
 Future (By Priority):
 Splash Screen
