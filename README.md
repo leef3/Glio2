@@ -12,14 +12,17 @@ Intro Sequence - Only for once new users save bool in Shared Pref (Tabbed Scroll
 
 Bugs:
 Ingredients Checkbox Repeats, has to do with list loading
+Navigation Drawer Icon not changing
 
 Future (By Priority):
-Splash Screen (Will now be added to Intro Sequence)
 Add Recipe Dialog for Recipe List Add
 Add Recipe ListView Dialog for WeekSchedule
+Recipe Organization by Alphabetical with Quick scroll (Links to refs below)
+
 Side Menu Spacing and Color
-Settings Fragment (Partially Done)
+Settings Fragment (Partially Done) -- Next just link to Priv Policy etc
 Two / Three Sets of Image Backgrounds in Settings (Have paths stored in strings for certain sets)
+Splash Screen (Will now be added to Intro Sequence)
 
 Far Future:
 Add Weeks Ingredient Compiler
@@ -27,3 +30,8 @@ Explore Recipes Function
 
 Far Far Future:
 Search Results for Recipes based on frequency (how many times added) -- A value stored in the Recipe object
+
+
+References:
+http://stackoverflow.com/questions/8192683/how-to-create-an-alphabetical-scrollbar-displaying-all-the-letter-in-android
+https://github.com/woozzu/IndexableListView/blob/master/src/com/woozzu/android/widget/IndexScroller.java
