@@ -47,7 +47,9 @@ public class IngredientListFragment extends ListFragment {
     {
         for(int x = 0; x < 20; x++)
         {
-            IngredientObject toAdd = new IngredientObject("Ingredient Test #" + x , "Quarts", 15.2);
+            IngredientObject toAdd = new IngredientObject("Ingredient Test #" + x);
+            toAdd.addAmount(15.2);
+            toAdd.addScale(new ScaleObject("Quarts", 10.23));
             ingredients.add(toAdd);
         }
     }

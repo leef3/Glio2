@@ -57,7 +57,7 @@ public class RecipeListAdapter extends BaseAdapter
         RecipeObject recipeItem = recipeList.get(position);
 
         //Set the contents of the UI elements
-        holder.name.setText(RecipeObject.getName());
+        holder.name.setText(recipeItem.getName());
 
         return convertView;
     }

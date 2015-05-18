@@ -47,6 +47,8 @@ public class IngredientListAdapter extends BaseAdapter
 
             //Find UI elements for Pay, Name, and Days
             holder.name = (TextView) convertView.findViewById(R.id.ingredient_list_item_name);
+            holder.amount = (TextView) convertView.findViewById(R.id.ingredient_list_item_amount);
+            holder.scale = (TextView) convertView.findViewById(R.id.ingredient_list_item_scale);
 
             convertView.setTag(holder);
         } else {
@@ -57,13 +59,18 @@ public class IngredientListAdapter extends BaseAdapter
         IngredientObject ingredientItem = ingredientList.get(position);
 
         //Set the contents of the UI elements
-        holder.name.setText(IngredientObject.getName());
+        holder.name.setText(ingredientItem.getName());
+        holder.scale.setText(ingredientItem.getScale().getName());
+        holder.amount.setText(Double.toString(ingredientItem.getAmount()));
+
 
         return convertView;
     }
 
     private class ViewHolder {
         TextView name;
+        TextView amount;
+        TextView scale;
     }
 
 }

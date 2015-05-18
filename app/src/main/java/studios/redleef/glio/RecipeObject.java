@@ -7,8 +7,8 @@ import java.util.ArrayList;
  */
 public class RecipeObject {
 
-    private static  String name;
-    private static ArrayList<IngredientObject> recipeList;
+    private  String name;
+    private ArrayList<IngredientObject> recipeList;
 
     //Constructor 1
     public RecipeObject(String newName)
@@ -23,8 +23,8 @@ public class RecipeObject {
     }
 
     //Getter Methods
-    public static String getName() {return name;}
-    public static ArrayList<IngredientObject> getList() {return recipeList;}
+    public String getName() {return name;}
+    public ArrayList<IngredientObject> getList() {return recipeList;}
 
     public void addIngredient(IngredientObject toAdd)
     {

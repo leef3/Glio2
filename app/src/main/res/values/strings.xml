@@ -15,5 +15,12 @@
 
     <string name="action_settings">Settings</string>
 
+    <string name="home_explanation">Click on a meal of the day to assign it a recipe or multiple recipes. Your weekly ingredient list will be generated from the input here.</string>
+
+    <string name="recipe_explanation">Manage your master list of recipes to choose from on the weekly schedule. Add new recipes. Delete a single item with a long hold</string>
+
     <string name="ingredient_explanation">Here is the generated ingredient list based on the meals you input for the week. Repeated ingredients are combined.</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

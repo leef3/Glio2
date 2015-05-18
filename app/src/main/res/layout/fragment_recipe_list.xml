@@ -23,6 +23,15 @@
         android:layout_height="2dp"
         android:layout_gravity="center_horizontal"></LinearLayout>
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/recipe_explanation"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal" />
+
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
