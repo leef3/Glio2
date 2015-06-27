@@ -19,6 +19,11 @@
 
     <string name="ingredient_explanation">Here is the generated ingredient list based on the meals you input for the week. Repeated ingredients are combined.</string>
 
+    <!-- VARIABLES FOR GSON SAVING DATA AND MASTER LIST STRING NAMES -->
+    <string name="master_scale_list_save_name">MASTERSCALEDATA</string>
+    <string name="master_recipe_list_save_name">MASTERRECIPEDATA</string>
+    <string name="master_ingredient_list_save_name">MASTERINGREDIENTDATA</string>
+    <string name="temporary_ingredient_list_save_name">TEMPINGREDIENTDATA</string>
 
     <!-- Testing Strings / StringArrays -->
     <string-array name="scale_array">

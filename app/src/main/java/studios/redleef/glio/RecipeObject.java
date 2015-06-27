@@ -8,26 +8,50 @@ import java.util.ArrayList;
 public class RecipeObject {
 
     private  String name;
-    private ArrayList<IngredientObject> recipeList;
+    private ArrayList<IngredientObject> ingredientList;
 
     //Constructor 1
     public RecipeObject(String newName)
     {
         name = newName;
+        ingredientList = new ArrayList<IngredientObject>();
     }
     //Constructor 2
-    public RecipeObject(String newName, ArrayList<IngredientObject> existingList)
+    public RecipeObject(String newName, ArrayList<IngredientObject> ingredientListIn)
     {
         name = newName;
-        recipeList = existingList;
+
+        if(ingredientListIn != null) {
+            this.ingredientList = ingredientListIn;
+        }
     }
 
     //Getter Methods
     public String getName() {return name;}
-    public ArrayList<IngredientObject> getList() {return recipeList;}
+    public ArrayList<IngredientObject> getList() {
+        if(ingredientList != null) {
+            return ingredientList;
+        }
+        else
+        {
+            return ingredientList = new ArrayList<IngredientObject>();
+        }
+    }
 
     public void addIngredient(IngredientObject toAdd)
     {
-        recipeList.add(toAdd);
+        ingredientList.add(toAdd);
+    }
+
+    public void removeIngredient(IngredientObject toRemove)
+    {
+        //NOT NEEDED FOR NOW -- LONG CLICK JUST REMOVES IT FROM ARRAYLIST IN DIALOG BEFORE SAVE
+        for(int x = 0; x < ingredientList.size(); x++)
+        {
+            if(ingredientList.get(x).getName() == toRemove.getName())
+            {
+
+            }
+        }
     }
 }

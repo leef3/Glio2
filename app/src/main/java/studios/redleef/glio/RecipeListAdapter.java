@@ -53,7 +53,7 @@ public class RecipeListAdapter extends BaseAdapter
             holder = (ViewHolder) convertView.getTag();
         }
 
-        //Get the current Employee Object
+        //Get the current Recipe Object
         RecipeObject recipeItem = recipeList.get(position);
 
         //Set the contents of the UI elements

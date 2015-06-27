@@ -2,18 +2,29 @@ package studios.redleef.glio;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -24,6 +35,7 @@ public class RecipeListFragment extends ListFragment {
     private static RecipeListAdapter mAdapter;
     private static Context context;
 
+    private final static String RECIPE_SAVE_NAME = "MASTER_RECIPE_DATA";
     private static ArrayList<RecipeObject> recipes;
 
     @Override public void onActivityCreated(Bundle savedInstanceState) {
@@ -44,10 +56,19 @@ public class RecipeListFragment extends ListFragment {
 
     private static void loadData()
     {
-        for(int x = 0; x < 20; x++)
-        {
-            RecipeObject toAdd = new RecipeObject("Recipe Test #" + x , null);
-            recipes.add(toAdd);
+        //Get the Master List of Recipes
+        SharedPreferences settings = context.getSharedPreferences("pref",0);
+        String objectData = settings.getString(RECIPE_SAVE_NAME, "");
+        if (!objectData.equals("")) {
+            System.out.println("Object Data: " + objectData);
+            Gson gson = new Gson();
+            Type collectionType = new TypeToken<ArrayList<RecipeObject>>() {
+            }.getType();
+            JsonArray jArray = new JsonParser().parse(objectData).getAsJsonArray();
+            for (JsonElement e : jArray) {
+                RecipeObject c = gson.fromJson(e, RecipeObject.class);
+                recipes.add(c);
+            }
         }
     }
 
@@ -91,9 +112,18 @@ public class RecipeListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         // Insert desired behavior here.
         RecipeObject selected = recipes.get(position);
-
-        //
+        recipes.remove(position);
+        mAdapter.notifyDataSetChanged();
+        saveData();
         Toast.makeText(getActivity(), selected.getName(), Toast.LENGTH_SHORT).show();
     }
 
+    private static void saveData()
+    {
+        SharedPreferences.Editor settings = context.getSharedPreferences("pref",0).edit();
+        String data = new Gson().toJson(recipes);
+        System.out.println("Data!: " + data);
+        settings.putString(RECIPE_SAVE_NAME, data);
+        settings.commit();
+    }
 }

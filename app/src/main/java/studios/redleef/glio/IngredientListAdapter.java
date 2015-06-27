@@ -75,6 +75,7 @@ public class IngredientListAdapter extends BaseAdapter
             }
         });
 
+
         return convertView;
     }
 
