@@ -3,66 +3,71 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_margin="5dp"
-        android:text="Add New Recipe"
-        android:textSize="20dp"
-        android:id="@+id/ingredient_title"
-        android:layout_gravity="center_horizontal" />
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:background="#0B610B"
-        android:layout_height="2dp"
-        android:layout_gravity="center_horizontal"></LinearLayout>
+    android:layout_margin="10dp">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.6"
+        android:background="#E0E0E0"
+        android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Recipe Ingredients"
-            android:layout_gravity="center_horizontal" />
-
-        <ListView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/listView"
-            android:layout_gravity="center_horizontal" />
+            android:id="@+id/editText"
+            android:layout_gravity="center_horizontal"
+            android:autoText="false"
+            android:hint="Name" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Ingredient"
+            android:id="@+id/addIngredientButton"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif-light" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.4"
-        android:layout_gravity="center_horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Ingredient List"
-            android:layout_gravity="center_horizontal" />
+        android:layout_height="0dp"
+        android:background="#E0E0E0"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="2">
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/listView3"
+            android:id="@+id/newIngredientListView"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/cancelNewRecipeButton"
+            android:fontFamily="sans-serif-light" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Save Recipe"
+            android:id="@+id/saveNewRecipeButton"
+            android:fontFamily="sans-serif-light" />
+    </LinearLayout>
+
 
 </LinearLayout>

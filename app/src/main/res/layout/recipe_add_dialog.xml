@@ -9,62 +9,96 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Add Ingredient" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/recipe_dialog_ingredient_name"
-        android:text="Ingredient Name Placeholder"/>
+        android:text="Add Ingredient"
+        android:textSize="20dp"
+        android:fontFamily="sans-serif-light" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="15dp"
+        android:paddingTop="7dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Name"
+            android:fontFamily="sans-serif-light" />
+
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:id="@+id/ingredient_spinner"
+            android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="0"
+        android:id="@+id/amount"
+        android:gravity="center"
+        android:textSize="17dp"
+        android:textIsSelectable="false"
+        android:fontFamily="sans-serif-light"
+        android:background="#C5E1A5"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="7dp"
         android:layout_gravity="center_horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Amount"/>
+            android:text="Amount"
+            android:fontFamily="sans-serif-light" />
 
-        <EditText
+        <SeekBar
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/recipe_dialog_name_input"
-            android:layout_weight="1">
-            <requestFocus />
-        </EditText>
+            android:layout_height="wrap_content"
+            android:id="@+id/amountSeekBar"
+            android:layout_weight="3" />
 
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:paddingTop="7dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal">
 
             <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="1"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Scale" />
+            android:text="Scale"
+                android:fontFamily="sans-serif-light" />
 
             <Spinner
             android:layout_width="0dp"
-                android:layout_weight="1"
+            android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner"
+            android:id="@+id/scale_spinner"
             android:layout_gravity="center_horizontal" />
 
         </LinearLayout>

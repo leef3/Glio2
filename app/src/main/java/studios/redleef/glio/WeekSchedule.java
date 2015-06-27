@@ -60,6 +60,10 @@ public class WeekSchedule extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        //getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        //getSupportActionBar().setCustomView(R.layout.actionbar);
+
+
     }
 
     void loadData() {
@@ -103,12 +107,14 @@ public class WeekSchedule extends ActionBarActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new WeekListFragment())
                     .commit();
+            setTitle("Week Schedule");
         }
         else if(position == 1)
         {
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new RecipeListFragment())
                     .commit();
+            setTitle("Recipe List");
         }
 
         //Shopping Ingredients Selected
@@ -117,6 +123,7 @@ public class WeekSchedule extends ActionBarActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new IngredientListFragment())
                     .commit();
+            setTitle("Grocery List");
         }
         //Setting Selected
         else if(position == 3)
@@ -124,6 +131,7 @@ public class WeekSchedule extends ActionBarActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new SettingsFragment())
                     .commit();
+            setTitle("Settings");
         }
 
     }
@@ -149,7 +157,7 @@ public class WeekSchedule extends ActionBarActivity
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
+        //actionBar.setTitle(mTitle);
     }
 
 
@@ -172,11 +180,6 @@ public class WeekSchedule extends ActionBarActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

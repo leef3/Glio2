@@ -20,7 +20,8 @@ import java.util.ArrayList;
 /**
  * Created by Fred Lee on 5/10/2015.
  */
-public class IngredientListFragment extends ListFragment {
+public class IngredientListFragment extends ListFragment
+{
 
     private static IngredientListAdapter mAdapter;
     private static Context context;

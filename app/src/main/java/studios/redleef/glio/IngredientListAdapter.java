@@ -8,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -49,6 +52,7 @@ public class IngredientListAdapter extends BaseAdapter
             holder.name = (TextView) convertView.findViewById(R.id.ingredient_list_item_name);
             holder.amount = (TextView) convertView.findViewById(R.id.ingredient_list_item_amount);
             holder.scale = (TextView) convertView.findViewById(R.id.ingredient_list_item_scale);
+            holder.itemBought = (CheckBox) convertView.findViewById(R.id.itemBoughtCheckBox);
 
             convertView.setTag(holder);
         } else {
@@ -62,15 +66,24 @@ public class IngredientListAdapter extends BaseAdapter
         holder.name.setText(ingredientItem.getName());
         holder.scale.setText(ingredientItem.getScale().getName());
         holder.amount.setText(Double.toString(ingredientItem.getAmount()));
+        holder.itemBought.setChecked(ingredientItem.getBought());
 
+        holder.itemBought.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "CheckBox Selected", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return convertView;
     }
+
 
     private class ViewHolder {
         TextView name;
         TextView amount;
         TextView scale;
+        CheckBox itemBought;
     }
 
 }
