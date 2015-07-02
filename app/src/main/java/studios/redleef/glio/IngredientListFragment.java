@@ -87,7 +87,50 @@ public class IngredientListFragment extends ListFragment
 
             for(int y = 0; y < singleRecipeIngredientList.size(); y++)
             {
-                tempIngredients.add(singleRecipeIngredientList.get(y));
+                boolean found = false;
+                for(int z = 0; z < tempIngredients.size(); z++)
+                {
+                    if(singleRecipeIngredientList.get(y).getName().equals(tempIngredients.get(z).getName()))
+                    {
+                        //TODO: RIGHT NOW VIEW DOES NOT DISPLAY CHANGE IN NORMALIZEDAMOUNT
+                        //CONFIGURE SO THAT IT CONVERTS TO ANY UNIT YOU WANT BUT FOR NOW MOCK IT
+                        //BY ADDING A NEW AMOUNT WITH BASE SCALE AS SCALE AND NORMALIZED AS AMOUNT
+                        ScaleObject tempScale = new ScaleObject("Base Unit", 1);
+                        tempIngredients.get(z).addAmount(singleRecipeIngredientList.get(y).getNormalizedAmount(), tempScale);
+                        found =true;
+                    }
+                }
+                //Just to be safe........
+                if(!found)
+                {
+                    IngredientObject temp = new IngredientObject(singleRecipeIngredientList.get(y).getName());
+                    //Base Unit New Scale Object --- But in the future just get this from our existing list
+                    ScaleObject tempScale = new ScaleObject("Base Unit", 1);
+                    temp.addAmount(singleRecipeIngredientList.get(y).getNormalizedAmount(), tempScale);
+                    tempIngredients.add(temp);
+                }
+
+                /*
+
+                for(int z = 0; z < tempIngredients.size(); z++)
+                {
+                    if(tempIngredients.get(z).getName().equals(temp.getName()))
+                    {
+                        //Item already exists, just combine normalizedAmounts
+                        tempIngredients.get(z).addNormalizedAmount(temp.getAmount() * temp.getScale().getMultiplier());
+
+                        //TODO: Maybe use a break here? Does it break out of IF or FOR loop?
+                    }
+                    //Just to be safe........
+                    else if(!exists)
+                    {
+                        //Base Unit New Scale Object --- But in the future just get this from our existing list
+                        ScaleObject tempScale = new ScaleObject("Base Unit", 1);
+                        temp.addAmount(singleRecipeIngredientList.get(y).getNormalizedAmount(), tempScale);
+                        tempIngredients.add(temp);
+                    }
+                }
+                */
             }
         }
     }

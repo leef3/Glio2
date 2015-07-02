@@ -12,7 +12,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +19,6 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -40,6 +38,7 @@ public class NewRecipeFragment extends Fragment {
     private static IngredientListAdapter mAdapter;
 
     private final static String RECIPE_SAVE_NAME = "MASTER_RECIPE_DATA";
+    private final static String SCALE_SAVE_NAME = "MASTER_SCALE_DATA";
 
     private static ListView newIngredientList;
 
@@ -50,6 +49,7 @@ public class NewRecipeFragment extends Fragment {
     //We need the master recipe list to add the new recipe to
     private static ArrayList<RecipeObject> recipes;
     private static ArrayList<IngredientObject> ingredients;
+    private static ArrayList<ScaleObject> scales;
 
     public NewRecipeFragment() {
         // Required empty public constructor
@@ -69,6 +69,7 @@ public class NewRecipeFragment extends Fragment {
 
         //Populate the list with test recipes
         recipes = new ArrayList<RecipeObject>();
+        scales = new ArrayList<ScaleObject>();
         loadData();
     }
 
@@ -86,6 +87,21 @@ public class NewRecipeFragment extends Fragment {
             for (JsonElement e : jArray) {
                 RecipeObject c = gson.fromJson(e, RecipeObject.class);
                 recipes.add(c);
+            }
+        }
+
+        //Get the Master List of Scales
+        settings = context.getSharedPreferences("pref", 0);
+        objectData = settings.getString(SCALE_SAVE_NAME, "");
+        if (!objectData.equals("")) {
+            System.out.println("Object Data: " + objectData);
+            Gson gson = new Gson();
+            Type collectionType = new TypeToken<ArrayList<ScaleObject>>() {
+            }.getType();
+            JsonArray jArray = new JsonParser().parse(objectData).getAsJsonArray();
+            for (JsonElement e : jArray) {
+                ScaleObject c = gson.fromJson(e, ScaleObject.class);
+                scales.add(c);
             }
         }
     }
@@ -135,8 +151,13 @@ public class NewRecipeFragment extends Fragment {
                 ingredientAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 ingredientSpinner.setAdapter(ingredientAdapter);
 
+                ArrayList<String> tempScaleNames = new ArrayList<String>();
+                for(int h = 0; h < scales.size(); h++)
+                {
+                    tempScaleNames.add(scales.get(h).getName());
+                }
                 final Spinner scaleSpinner = (Spinner) promptsView.findViewById(R.id.scale_spinner);
-                ArrayAdapter<CharSequence> scaleAdapter = ArrayAdapter.createFromResource(context, R.array.scale_array, android.R.layout.simple_spinner_item);
+                ArrayAdapter<String> scaleAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, tempScaleNames);
                 scaleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 scaleSpinner.setAdapter(scaleAdapter);
 
@@ -175,11 +196,17 @@ public class NewRecipeFragment extends Fragment {
                         IngredientObject ingredientToAdd = new IngredientObject(ingredientName);
                         //TODO Add Scale and Amount (Scale needs to be a scale object)
 
-                        //Instead of creating a new scale we get it from master list (create for test)
-                        ScaleObject ingredientScale = new ScaleObject("Quart", 2.2);
-                        ingredientToAdd.addScale(ingredientScale);
-
-                        ingredientToAdd.addAmount(Double.valueOf(amount.getText().toString()));
+                        //Get the scale from the arraylsit of scales -- Need to find a better way to re-find it
+                        //Possibly implement a toString in the scale object to display the spinner so that
+                        //getSelectedItem can return the object instead of jsut the string
+                        String scaleName = scaleSpinner.getSelectedItem().toString();
+                        for(int i = 0; i < scales.size(); i++)
+                        {
+                            if(scaleName.equals(scales.get(i).getName()))
+                            {
+                                ingredientToAdd.addAmount(Double.valueOf(amount.getText().toString()), scales.get(i));
+                            }
+                        }
                         addNewIngredient(ingredientToAdd);
                     }
                 });

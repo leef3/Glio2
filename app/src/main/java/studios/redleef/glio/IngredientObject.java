@@ -9,20 +9,27 @@ public class IngredientObject {
     private ScaleObject scale;
     private double amount;
     private boolean bought;
+    private double normalizedAmount;
 
     public IngredientObject(String newName)
     {
         name = newName;
         bought = false;
+        amount = 0;
+        normalizedAmount = 0;
+        scale = new ScaleObject("N/A", 0);
     }
 
-    public void addScale(ScaleObject toAdd)
+    public void addAmount(double amountToAdd, ScaleObject scaleToAdd)
     {
-        scale = toAdd;
+        amount = amountToAdd;
+        scale = scaleToAdd;
+        normalizedAmount = (amountToAdd * scaleToAdd.getMultiplier());
     }
-    public void addAmount(double toAdd)
+
+    public void addNormalizedAmount(double toAdd)
     {
-        amount = toAdd;
+        normalizedAmount = normalizedAmount + toAdd;
     }
 
     public void toggleChecked()
@@ -36,5 +43,6 @@ public class IngredientObject {
     public ScaleObject getScale() {return scale;}
     public double getAmount() {return amount;}
     public boolean getBought() {return bought;}
+    public double getNormalizedAmount() {return normalizedAmount;}
 
 }

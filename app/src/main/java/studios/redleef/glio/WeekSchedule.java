@@ -30,6 +30,9 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class WeekSchedule extends ActionBarActivity
@@ -44,6 +47,9 @@ public class WeekSchedule extends ActionBarActivity
      * Used to store the last screen title. For use in {@liunk #restoreActionBar()}.
      */
     private CharSequence mTitle;
+
+    private static Context context;
+    private final static String SCALE_SAVE_NAME = "MASTER_SCALE_DATA";
 
 
     @Override
@@ -60,28 +66,77 @@ public class WeekSchedule extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        context = this;
+        loadData();
         //getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         //getSupportActionBar().setCustomView(R.layout.actionbar);
 
 
     }
 
-    void loadData() {
-        /*
-        SharedPreferences settings = this.getPreferences(MODE_PRIVATE);
-        String objectData = settings.getString(EMPLOYEE_SAVE_NAME, "");
-        if (!objectData.equals("")) {
-            System.out.println("Object Data: " + objectData);
-            Gson gson = new Gson();
-            Type collectionType = new TypeToken<ArrayList<Employee>>() {
-            }.getType();
-            JsonArray jArray = new JsonParser().parse(objectData).getAsJsonArray();
-            for (JsonElement e : jArray) {
-                Employee c = gson.fromJson(e, Employee.class);
-                employeeList.add(c);
-            }
+    public void loadData()
+    {
+
+        //Get the Master List of Scales
+        SharedPreferences settings = context.getSharedPreferences("pref", 0);
+        String objectData = settings.getString(SCALE_SAVE_NAME, "");
+        if (!objectData.equals(""))
+        {
+            //List already exists meaning we have already created it before... Do nothing
         }
-        */
+        else
+        {
+            //We want to populate the list of scales for the first time (This is a one time costly procedure)
+
+            //Everything liquid measured in base unit of Fl. Ounce -- Will be normalized in IngredientObj
+            ScaleObject newScale1 = new ScaleObject("Teaspoon", 0.16666667);
+            ScaleObject newScale2 = new ScaleObject("Tablespoon", 0.5);
+            ScaleObject newScale3 = new ScaleObject("Fl. Ounce", 1);
+            ScaleObject newScale4 = new ScaleObject("Cup", 8);
+            ScaleObject newScale5 = new ScaleObject("Pint", 16);
+            ScaleObject newScale6 = new ScaleObject("Quart", 32);
+            ScaleObject newScale7 = new ScaleObject("Gallon", 128);
+            //TODO: Maybe add Liquid/Solid to the Scale Object so that combining them will be easier - No Confusion
+
+            ArrayList<ScaleObject> tempScales = new ArrayList<ScaleObject>();
+            tempScales.add(newScale1);
+            tempScales.add(newScale2);
+            tempScales.add(newScale3);
+            tempScales.add(newScale4);
+            tempScales.add(newScale5);
+            tempScales.add(newScale6);
+            tempScales.add(newScale7);
+
+            //Base Unit for solids is a Gram
+            ScaleObject newScale8 = new ScaleObject("g", 1);
+            ScaleObject newScale9 = new ScaleObject("Kg", 1000);
+            ScaleObject newScale10 = new ScaleObject("Mg", 0.001);
+            ScaleObject newScale11 = new ScaleObject("Lb", 453.592);
+
+            tempScales.add(newScale8);
+            tempScales.add(newScale9);
+            tempScales.add(newScale10);
+            tempScales.add(newScale11);
+
+            saveScales(tempScales);
+        }
+    }
+    public void saveScales(ArrayList<ScaleObject> toAdd)
+    {
+        SharedPreferences.Editor settings = context.getSharedPreferences("pref",0).edit();
+        String data = new Gson().toJson(toAdd);
+        System.out.println("Data!: " + data);
+        settings.putString(SCALE_SAVE_NAME, data);
+        settings.commit();
+    }
+    public void saveIngredients(ArrayList<IngredientObject> toAdd)
+    {
+
+    }
+    public void saveRecipes(ArrayList<RecipeObject> toAdd)
+    {
+        //TODO: THIS IS A PURCHASE OPTION FOR RECIPE BOOK ADDONS - ASIAN / AMERICAN / DIET
+        //Just add to the existing Recipe List
     }
 
 
