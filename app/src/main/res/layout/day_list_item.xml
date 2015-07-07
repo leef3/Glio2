@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:layout_margin="10dp">
+    android:layout_width="fill_parent" android:layout_height="fill_parent"
+    android:clickable="false">
 
     <ImageView
         android:layout_width="match_parent"
@@ -9,6 +9,7 @@
         android:background="#FFFFFF"
         android:id="@+id/day_item_image"
         android:adjustViewBounds="true"
+        android:clickable="false"
         android:layout_gravity="center_horizontal" />
 
     <LinearLayout
@@ -41,6 +42,7 @@
         android:text="Breakfast"
         android:paddingLeft="10dp"
         android:layout_marginTop="15dp"
+        android:clickable="true"
         android:id="@+id/day_item_breakfast"
         android:layout_below="@+id/day_item_title" />
 
@@ -52,6 +54,7 @@
         android:fontFamily="sans-serif-thin"
         android:text="Lunch"
         android:paddingLeft="10dp"
+        android:clickable="true"
         android:layout_marginTop="10dp"
         android:id="@+id/day_item_lunch"
         android:layout_below="@+id/day_item_breakfast" />
@@ -63,6 +66,7 @@
         android:layout_marginTop="10dp"
         android:textSize="20dp"
         android:paddingLeft="10dp"
+        android:clickable="true"
         android:fontFamily="sans-serif-thin"
         android:text="Dinner"
         android:id="@+id/day_item_dinner"

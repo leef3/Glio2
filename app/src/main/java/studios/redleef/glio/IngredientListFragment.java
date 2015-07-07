@@ -57,7 +57,7 @@ public class IngredientListFragment extends ListFragment
         loadData();
 
         // Create an empty adapter we will use to display the loaded data.
-        mAdapter = new IngredientListAdapter(context, tempIngredients);
+        mAdapter = new IngredientListAdapter(context, tempIngredients, true);
 
         setListAdapter(mAdapter);
     }

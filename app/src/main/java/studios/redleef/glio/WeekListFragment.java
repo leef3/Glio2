@@ -100,7 +100,7 @@ public class WeekListFragment extends ListFragment{
         DayObject selected = days.get(position);
 
         //
-        Toast.makeText(getActivity(), selected.getName(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), selected.getName(), Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -26,23 +26,32 @@ public class IngredientObject {
         scale = scaleToAdd;
         normalizedAmount = (amountToAdd * scaleToAdd.getMultiplier());
     }
+    /*
+        USED FOR NEW RECIPE FRAGMENT -- ADDING AN INGREDIENT WHERE SCALE APPEARS WITH IT
+     */
+    //If no scale object is given, return the amount
+    public double getAmount() {return amount;}
+    //Method above goes hand in hand/ if no scale given then get the original scale
+    public ScaleObject getScale() {return scale;}
 
-    public void addNormalizedAmount(double toAdd)
+    /*
+        USED FOR WEEKLY INGREDIENT LIST -- WHERE NORMALIZED AMOUNTS NEED TO COMBINE
+     */
+    public double getAmount(ScaleObject displayScale)
     {
-        normalizedAmount = normalizedAmount + toAdd;
+        return (normalizedAmount/displayScale.getMultiplier());
     }
 
+    //TODO: TRACKS BOUGHT ITEMS IN THE WEEKLY INGREDIENT LIST
     public void toggleChecked()
     {
         bought = !bought;
     }
+    public boolean getChecked() {return bought;}
 
 
     //Getter Setter Methods
     public String getName() {return name;}
-    public ScaleObject getScale() {return scale;}
-    public double getAmount() {return amount;}
-    public boolean getBought() {return bought;}
     public double getNormalizedAmount() {return normalizedAmount;}
 
 }

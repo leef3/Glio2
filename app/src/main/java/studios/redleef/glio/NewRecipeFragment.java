@@ -58,7 +58,6 @@ public class NewRecipeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override public void onActivityCreated(Bundle savedInstanceState) {
@@ -125,7 +124,7 @@ public class NewRecipeFragment extends Fragment {
         //Ingredient Listview initialization
         newIngredientList = (ListView)layout.findViewById(R.id.newIngredientListView);
         ingredients = new ArrayList<IngredientObject>();
-        mAdapter = new IngredientListAdapter(getActivity(), ingredients);
+        mAdapter = new IngredientListAdapter(getActivity(), ingredients, false);
         newIngredientList.setAdapter(mAdapter);
 
         //TODO Add OnLongClickListener for Deleting Ingredients
@@ -172,9 +171,7 @@ public class NewRecipeFragment extends Fragment {
                 amountBar.setMax(50);
                 amountBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                     public void onStopTrackingTouch(SeekBar seekBar) {
-                        // TODO Auto-generated method stub
                     }
-
                     public void onStartTrackingTouch(SeekBar seekBar) {
                     }
                     public void onProgressChanged(SeekBar seekBar,
@@ -194,7 +191,6 @@ public class NewRecipeFragment extends Fragment {
                         String ingredientName = ingredientSpinner.getSelectedItem().toString();
 
                         IngredientObject ingredientToAdd = new IngredientObject(ingredientName);
-                        //TODO Add Scale and Amount (Scale needs to be a scale object)
 
                         //Get the scale from the arraylsit of scales -- Need to find a better way to re-find it
                         //Possibly implement a toString in the scale object to display the spinner so that

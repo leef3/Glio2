@@ -9,6 +9,8 @@ public class DayObject {
 
     private String name;
     private int image;
+
+    //Meals already contain names for breakfast / lunch / dfinner
     private ArrayList<MealObject> mealList;
 
     public DayObject(String newName, int newImage)
@@ -24,7 +26,7 @@ public class DayObject {
 
     public ArrayList<MealObject> getList() {return mealList;}
 
-    //Return the Recipe List of a Meal object found in the Day's Meal List
+    //Return the Recipe List of a Meal object found in the Day's Meal List (Based on Breakfast lunch dinner)
     public MealObject getMeal(String toFind)
     {
         for(int x = 0; x < mealList.size(); x++)

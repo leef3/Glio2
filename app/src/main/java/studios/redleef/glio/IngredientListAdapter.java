@@ -21,12 +21,14 @@ public class IngredientListAdapter extends BaseAdapter
     Context context;
     protected ArrayList<IngredientObject> ingredientList;
     LayoutInflater inflater;
+    boolean hasCheckbox;
 
     //Constructor
-    public IngredientListAdapter(Context context, ArrayList<IngredientObject> ingredientList) {
+    public IngredientListAdapter(Context context, ArrayList<IngredientObject> ingredientList, boolean hasCheckbox) {
         this.ingredientList = ingredientList;
         this.inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
+        this.hasCheckbox = hasCheckbox;
     }
 
     //Returns count,
@@ -53,6 +55,8 @@ public class IngredientListAdapter extends BaseAdapter
             holder.amount = (TextView) convertView.findViewById(R.id.ingredient_list_item_amount);
             holder.scale = (TextView) convertView.findViewById(R.id.ingredient_list_item_scale);
             holder.itemBought = (CheckBox) convertView.findViewById(R.id.itemBoughtCheckBox);
+            //Used to re-track the ingredient
+            holder.itemBought.setTag(position);
 
             convertView.setTag(holder);
         } else {
@@ -66,12 +70,14 @@ public class IngredientListAdapter extends BaseAdapter
         holder.name.setText(ingredientItem.getName());
         holder.scale.setText(ingredientItem.getScale().getName());
         holder.amount.setText(Double.toString(ingredientItem.getAmount()));
-        holder.itemBought.setChecked(ingredientItem.getBought());
+        holder.itemBought.setChecked(ingredientItem.getChecked());
 
         holder.itemBought.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "CheckBox Selected", Toast.LENGTH_SHORT).show();
+                int tempPosition = (Integer) v.getTag();
+                Toast.makeText(context, "CheckBox Selected " + tempPosition, Toast.LENGTH_SHORT).show();
+                ingredientList.get(tempPosition).toggleChecked();
             }
         });
 
