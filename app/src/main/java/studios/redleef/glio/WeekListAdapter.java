@@ -5,11 +5,16 @@ package studios.redleef.glio;
  */
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -101,6 +106,7 @@ public class WeekListAdapter extends BaseAdapter
             public void onClick(View v) {
                 int tempPosition = (Integer) v.getTag();
                 Toast.makeText(context, dayList.get(tempPosition).getName() + " Breakfast", Toast.LENGTH_SHORT).show();
+                chooseMealDialog(tempPosition);
             }
         });
         holder.lunch.setText("Lunch: Tap to set");
@@ -109,6 +115,7 @@ public class WeekListAdapter extends BaseAdapter
             public void onClick(View v) {
                 int tempPosition = (Integer) v.getTag();
                 Toast.makeText(context, dayList.get(tempPosition).getName() + " Lunch", Toast.LENGTH_SHORT).show();
+                chooseMealDialog(tempPosition);
             }
         });
         holder.dinner.setText("Dinner: Tap to set");
@@ -117,6 +124,7 @@ public class WeekListAdapter extends BaseAdapter
             public void onClick(View v) {
                 int tempPosition = (Integer) v.getTag();
                 Toast.makeText(context, dayList.get(tempPosition).getName() + " Dinner", Toast.LENGTH_SHORT).show();
+                chooseMealDialog(tempPosition);
             }
         });
 
@@ -133,15 +141,66 @@ public class WeekListAdapter extends BaseAdapter
         TextView dinner;
     }
 
-    /*
+
     private void chooseMealDialog(int position)
     {
         LayoutInflater li = LayoutInflater.from(context);
-        final View promptsView = li.inflate(R.layout.recipe_add_dialog, null);
+        final View promptsView = li.inflate(R.layout.meal_add_dialog, null);
         //AlertDialog.Builder builder = new AlertDialog.Builder(context);
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(promptsView);
+
+        //Set up the spinners
+        final Spinner ingredientSpinner = (Spinner) promptsView.findViewById(R.id.mealDialogRecipeSpinner);
+        ArrayAdapter<CharSequence> ingredientAdapter = ArrayAdapter.createFromResource(context, R.array.ingredient_array, android.R.layout.simple_spinner_item);
+        ingredientAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ingredientSpinner.setAdapter(ingredientAdapter);
+
+        final Button addNewSpinner = (Button) promptsView.findViewById(R.id.mealDialogAddNewSpinner);
+
+        //Pass in the promptsView so that we can find our linear layout later
+        addNewSpinner.setTag(promptsView);
+
+        addNewSpinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //int tempPosition = (Integer) v.getTag();
+                //Toast.makeText(context, "Add New Recipe Spinner -- Also Position =  " + tempPosition, Toast.LENGTH_SHORT).show();
+
+                //Get the total dialog view from the tag
+                View dialogView = (View)v.getTag();
+                //Increment counter
+                //TODO: MAKE SURE THE SPINNERS GETTING ADDED HAVE ID'S THAT CAN BE TRACED BACK LATER
+                //Find the spinner layout
+                LinearLayout spinnerLayout = (LinearLayout)dialogView.findViewById(R.id.mealDialogRecipeSpinnerLinearLayout);
+
+                //Create the new spinner
+                Spinner newSpinner = new Spinner(context);
+                ArrayAdapter<CharSequence> ingredientAdapter = ArrayAdapter.createFromResource(context, R.array.ingredient_array, android.R.layout.simple_spinner_item);
+                ingredientAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                newSpinner.setAdapter(ingredientAdapter);
+
+                //Add the view to the spinner layout
+                spinnerLayout.addView(newSpinner);
+            }
+        });
+
+        // Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        //Cancel if user selects cancel
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        //Show the dialog
+        builder.show();
     }
-    */
+
 
 }

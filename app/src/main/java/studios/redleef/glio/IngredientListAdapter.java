@@ -58,6 +58,11 @@ public class IngredientListAdapter extends BaseAdapter
             //Used to re-track the ingredient
             holder.itemBought.setTag(position);
 
+            if(hasCheckbox == false)
+            {
+                holder.itemBought.setVisibility(View.INVISIBLE);
+            }
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
