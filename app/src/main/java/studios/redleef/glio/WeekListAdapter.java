@@ -106,7 +106,7 @@ public class WeekListAdapter extends BaseAdapter
             public void onClick(View v) {
                 int tempPosition = (Integer) v.getTag();
                 Toast.makeText(context, dayList.get(tempPosition).getName() + " Breakfast", Toast.LENGTH_SHORT).show();
-                chooseMealDialog(tempPosition);
+                chooseMealDialog(tempPosition, dayList.get(tempPosition).getName() + " Dinner");
             }
         });
         holder.lunch.setText("Lunch: Tap to set");
@@ -115,7 +115,7 @@ public class WeekListAdapter extends BaseAdapter
             public void onClick(View v) {
                 int tempPosition = (Integer) v.getTag();
                 Toast.makeText(context, dayList.get(tempPosition).getName() + " Lunch", Toast.LENGTH_SHORT).show();
-                chooseMealDialog(tempPosition);
+                chooseMealDialog(tempPosition, dayList.get(tempPosition).getName() + " Dinner");
             }
         });
         holder.dinner.setText("Dinner: Tap to set");
@@ -124,7 +124,7 @@ public class WeekListAdapter extends BaseAdapter
             public void onClick(View v) {
                 int tempPosition = (Integer) v.getTag();
                 Toast.makeText(context, dayList.get(tempPosition).getName() + " Dinner", Toast.LENGTH_SHORT).show();
-                chooseMealDialog(tempPosition);
+                chooseMealDialog(tempPosition, dayList.get(tempPosition).getName() + " Dinner");
             }
         });
 
@@ -142,13 +142,16 @@ public class WeekListAdapter extends BaseAdapter
     }
 
 
-    private void chooseMealDialog(int position)
+    private void chooseMealDialog(int position, String title)
     {
         LayoutInflater li = LayoutInflater.from(context);
         final View promptsView = li.inflate(R.layout.meal_add_dialog, null);
         //AlertDialog.Builder builder = new AlertDialog.Builder(context);
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(promptsView);
+
+        final TextView mealTitle = (TextView)promptsView.findViewById(R.id.mealDialogTitle);
+        mealTitle.setText(title);
 
         //Set up the spinners
         final Spinner ingredientSpinner = (Spinner) promptsView.findViewById(R.id.mealDialogRecipeSpinner);
@@ -168,20 +171,33 @@ public class WeekListAdapter extends BaseAdapter
                 //Toast.makeText(context, "Add New Recipe Spinner -- Also Position =  " + tempPosition, Toast.LENGTH_SHORT).show();
 
                 //Get the total dialog view from the tag
-                View dialogView = (View)v.getTag();
+                View dialogView = (View) v.getTag();
                 //Increment counter
                 //TODO: MAKE SURE THE SPINNERS GETTING ADDED HAVE ID'S THAT CAN BE TRACED BACK LATER
                 //Find the spinner layout
-                LinearLayout spinnerLayout = (LinearLayout)dialogView.findViewById(R.id.mealDialogRecipeSpinnerLinearLayout);
+                LinearLayout spinnerLayout = (LinearLayout) dialogView.findViewById(R.id.mealDialogRecipeSpinnerLinearLayout);
 
-                //Create the new spinner
-                Spinner newSpinner = new Spinner(context);
-                ArrayAdapter<CharSequence> ingredientAdapter = ArrayAdapter.createFromResource(context, R.array.ingredient_array, android.R.layout.simple_spinner_item);
-                ingredientAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                newSpinner.setAdapter(ingredientAdapter);
+                //Count the children of the layout -- Make sure we don't exceed say...10 meals (who is gonna eat that much anyways?!)
+                int numMeals = spinnerLayout.getChildCount();
 
-                //Add the view to the spinner layout
-                spinnerLayout.addView(newSpinner);
+                if (numMeals < 10)
+                {
+                    //Create the new spinner
+                    Spinner newSpinner = new Spinner(context);
+                    ArrayAdapter<CharSequence> ingredientAdapter = ArrayAdapter.createFromResource(context, R.array.ingredient_array, android.R.layout.simple_spinner_item);
+                    ingredientAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    newSpinner.setAdapter(ingredientAdapter);
+
+                    //Add the view to the spinner layout
+                    spinnerLayout.addView(newSpinner);
+                }
+                else
+                {
+                    addNewSpinner.setEnabled(false);
+                    Toast.makeText(context, "Sorry, Meal limit is 10", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 
