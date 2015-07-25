@@ -101,7 +101,7 @@ public class WeekListAdapter extends BaseAdapter
                 int tempPosition = (Integer) v.getTag();
                 Toast.makeText(context, dayList.get(tempPosition).getName() + " Breakfast", Toast.LENGTH_SHORT).show();
                 //chooseMealDialog(tempPosition, dayList.get(tempPosition).getName() + " Breakfast");
-                showDialog(tempPosition,dayList.get(tempPosition).getName() );
+                showDialog(tempPosition, dayList.get(tempPosition).getName() + " Breakfast");
 
             }
         });
@@ -111,7 +111,7 @@ public class WeekListAdapter extends BaseAdapter
             public void onClick(View v) {
                 int tempPosition = (Integer) v.getTag();
                 Toast.makeText(context, tempPosition + " Lunch", Toast.LENGTH_SHORT).show();
-                //chooseMealDialog(tempPosition, dayList.get(tempPosition).getName() + " Lunch");
+                showDialog(tempPosition, dayList.get(tempPosition).getName() + " Lunch");
             }
         });
         holder.dinner.setText("Dinner: Tap to set");
@@ -120,7 +120,7 @@ public class WeekListAdapter extends BaseAdapter
             public void onClick(View v) {
                 int tempPosition = (Integer) v.getTag();
                 Toast.makeText(context, dayList.get(tempPosition).getName() + " Dinner", Toast.LENGTH_SHORT).show();
-                //chooseMealDialog(tempPosition, dayList.get(tempPosition).getName() + " Dinner");
+                showDialog(tempPosition, dayList.get(tempPosition).getName() + " Dinner");
             }
         });
 
@@ -141,9 +141,11 @@ public class WeekListAdapter extends BaseAdapter
     {
         //FragmentTransaction ft = fragManager.beginTransaction();
         MealDialogFragment newDialog = MealDialogFragment.newInstance(position, title);
-        newDialog.show(fragManager, "test");
+        newDialog.show(fragManager, "new_meal_dialog");
     }
 
+    //=======================GRAVEYARD BEYOND THIS PT==============================================
+    /*
     private void chooseMealDialog(int position, String title)
     {
         LayoutInflater li = LayoutInflater.from(context);
@@ -163,7 +165,7 @@ public class WeekListAdapter extends BaseAdapter
 
         final Button addNewSpinner = (Button) promptsView.findViewById(R.id.mealDialogAddNewSpinner);
 
-        //TODO: CHANGE FROM MANUAL SPINNER ADD TO LISTVIEW ADD ELEMENT
+
         //final ListView mealDialogListView = (ListView) promptsView.findViewById(R.id.addMealDialogListView);
 
 
@@ -179,7 +181,7 @@ public class WeekListAdapter extends BaseAdapter
                 //Get the total dialog view from the tag
                 View dialogView = (View) v.getTag();
                 //Increment counter
-                //TODO: MAKE SURE THE SPINNERS GETTING ADDED HAVE ID'S THAT CAN BE TRACED BACK LATER
+
                 //Find the spinner layout
                 LinearLayout spinnerLayout = (LinearLayout) dialogView.findViewById(R.id.mealDialogRecipeSpinnerLinearLayout);
 
@@ -228,6 +230,7 @@ public class WeekListAdapter extends BaseAdapter
         //Show the dialog
         builder.show();
     }
+    */
 
 
 }
