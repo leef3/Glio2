@@ -3,9 +3,14 @@ package studios.redleef.glio;
 /**
  * Created by Fred Lee on 5/10/2015.
  */
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.app.DialogFragment;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +19,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,12 +32,14 @@ public class WeekListAdapter extends BaseAdapter
     Context context;
     protected ArrayList<DayObject> dayList;
     LayoutInflater inflater;
+    FragmentManager fragManager;
 
     //Constructor
     public WeekListAdapter(Context context, ArrayList<DayObject> dayList) {
         this.dayList = dayList;
         this.inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
+        fragManager = ((WeekSchedule) context).getSupportFragmentManager();
     }
 
     //Returns count,
@@ -51,6 +59,7 @@ public class WeekListAdapter extends BaseAdapter
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
+
             convertView = this.inflater.inflate(R.layout.day_list_item, parent, false);
 
             //Find UI elements for Day Name / Meal Name / Background Image
@@ -59,13 +68,13 @@ public class WeekListAdapter extends BaseAdapter
             holder.title = (TextView) convertView.findViewById(R.id.day_item_title);
 
             holder.breakfast = (TextView) convertView.findViewById(R.id.day_item_breakfast);
-            holder.breakfast.setTag(position);
+
 
             holder.lunch = (TextView) convertView.findViewById(R.id.day_item_lunch);
-            holder.lunch.setTag(position);
+
 
             holder.dinner = (TextView) convertView.findViewById(R.id.day_item_dinner);
-            holder.dinner.setTag(position);
+
 
             convertView.setTag(holder);
         } else {
@@ -75,38 +84,25 @@ public class WeekListAdapter extends BaseAdapter
         //Get the current day object
         DayObject dayItem = dayList.get(position);
 
+        holder.dinner.setTag(position);
+        holder.lunch.setTag(position);
+        holder.breakfast.setTag(position);
+
         //Set the contents of the UI elements
         holder.image.setImageResource(dayItem.getImage());
 
         holder.title.setText(dayItem.getName());
 
-        //Set null textviews if nothing is chosen yet
-        /*
-        if(dayItem.getMeal("Breakfast").equals(null))
-        {
-            holder.breakfast.setText("Breakfast: Click to set");
-        }
-        else
-        {
-            //Fill the textview up with list of recipes
-            holder.breakfast.setText(dayItem.getList().get(0).getName());
-        }
-        if(dayItem.getMeal("Lunch") == (null))
-        {
-            holder.lunch.setText("Lunch: Click to set");
-        }
-        if(dayItem.getMeal("Dinner") == (null))
-        {
-            holder.dinner.setText("Dinner: Click to set");
-        }
-        */
+        //Set the title of the dialog box
         holder.breakfast.setText("Breakfast: Tap to set");
         holder.breakfast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int tempPosition = (Integer) v.getTag();
                 Toast.makeText(context, dayList.get(tempPosition).getName() + " Breakfast", Toast.LENGTH_SHORT).show();
-                chooseMealDialog(tempPosition, dayList.get(tempPosition).getName() + " Dinner");
+                //chooseMealDialog(tempPosition, dayList.get(tempPosition).getName() + " Breakfast");
+                showDialog(tempPosition,dayList.get(tempPosition).getName() );
+
             }
         });
         holder.lunch.setText("Lunch: Tap to set");
@@ -114,8 +110,8 @@ public class WeekListAdapter extends BaseAdapter
             @Override
             public void onClick(View v) {
                 int tempPosition = (Integer) v.getTag();
-                Toast.makeText(context, dayList.get(tempPosition).getName() + " Lunch", Toast.LENGTH_SHORT).show();
-                chooseMealDialog(tempPosition, dayList.get(tempPosition).getName() + " Dinner");
+                Toast.makeText(context, tempPosition + " Lunch", Toast.LENGTH_SHORT).show();
+                //chooseMealDialog(tempPosition, dayList.get(tempPosition).getName() + " Lunch");
             }
         });
         holder.dinner.setText("Dinner: Tap to set");
@@ -124,7 +120,7 @@ public class WeekListAdapter extends BaseAdapter
             public void onClick(View v) {
                 int tempPosition = (Integer) v.getTag();
                 Toast.makeText(context, dayList.get(tempPosition).getName() + " Dinner", Toast.LENGTH_SHORT).show();
-                chooseMealDialog(tempPosition, dayList.get(tempPosition).getName() + " Dinner");
+                //chooseMealDialog(tempPosition, dayList.get(tempPosition).getName() + " Dinner");
             }
         });
 
@@ -141,6 +137,12 @@ public class WeekListAdapter extends BaseAdapter
         TextView dinner;
     }
 
+    private void showDialog(int position, String title)
+    {
+        //FragmentTransaction ft = fragManager.beginTransaction();
+        MealDialogFragment newDialog = MealDialogFragment.newInstance(position, title);
+        newDialog.show(fragManager, "test");
+    }
 
     private void chooseMealDialog(int position, String title)
     {
@@ -160,6 +162,10 @@ public class WeekListAdapter extends BaseAdapter
         ingredientSpinner.setAdapter(ingredientAdapter);
 
         final Button addNewSpinner = (Button) promptsView.findViewById(R.id.mealDialogAddNewSpinner);
+
+        //TODO: CHANGE FROM MANUAL SPINNER ADD TO LISTVIEW ADD ELEMENT
+        //final ListView mealDialogListView = (ListView) promptsView.findViewById(R.id.addMealDialogListView);
+
 
         //Pass in the promptsView so that we can find our linear layout later
         addNewSpinner.setTag(promptsView);
@@ -188,6 +194,8 @@ public class WeekListAdapter extends BaseAdapter
                     ingredientAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     newSpinner.setAdapter(ingredientAdapter);
 
+                    newSpinner.setBackgroundColor(Color.parseColor("#C5E1A5"));
+                    newSpinner.setPadding(0, 10, 0, 10);
                     //Add the view to the spinner layout
                     spinnerLayout.addView(newSpinner);
                 }
@@ -205,6 +213,9 @@ public class WeekListAdapter extends BaseAdapter
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                //RIGHT NOW ONLY ADDS THE FIRST SPINNER VALUE, VERY SOON LISTVIEW CYCLE WILL COLLECT ALL RECIPES
+                int recipeIndex = ingredientSpinner.getSelectedItemPosition();
+                
             }
         });
         //Cancel if user selects cancel

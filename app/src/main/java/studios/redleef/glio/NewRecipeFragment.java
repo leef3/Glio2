@@ -178,6 +178,7 @@ public class NewRecipeFragment extends Fragment {
                                                   int progress, boolean fromUser) {
                         //For some reason it crashes when not a string and cant use toString
                         amount.setText(progress + "");
+                        //TODO: SET PROGRESS TO A DECIMAL SO THAT THEY CAN ADD TO 9.5 (doubble 100/10)
                     }
                 });
 

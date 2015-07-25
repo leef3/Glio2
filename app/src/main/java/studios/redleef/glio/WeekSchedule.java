@@ -4,13 +4,14 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -50,6 +51,7 @@ public class WeekSchedule extends ActionBarActivity
 
     private static Context context;
     private final static String SCALE_SAVE_NAME = "MASTER_SCALE_DATA";
+    private final static String WEEKLY_MEAL_SAVE_NAME = "TEMP_WEEKLY_MEAL_DATA";
 
 
     @Override
@@ -76,7 +78,6 @@ public class WeekSchedule extends ActionBarActivity
 
     public void loadData()
     {
-
         //Get the Master List of Scales
         SharedPreferences settings = context.getSharedPreferences("pref", 0);
         String objectData = settings.getString(SCALE_SAVE_NAME, "");
@@ -120,6 +121,7 @@ public class WeekSchedule extends ActionBarActivity
 
             saveScales(tempScales);
         }
+        //=======================FOR WEEKLY MEALS=================================
     }
     public void saveScales(ArrayList<ScaleObject> toAdd)
     {
@@ -137,6 +139,15 @@ public class WeekSchedule extends ActionBarActivity
     {
         //TODO: THIS IS A PURCHASE OPTION FOR RECIPE BOOK ADDONS - ASIAN / AMERICAN / DIET
         //Just add to the existing Recipe List
+    }
+
+    public void saveWeeklyMeals(ArrayList<MealObject> toAdd)
+    {
+        SharedPreferences.Editor settings = context.getSharedPreferences("pref",0).edit();
+        String data = new Gson().toJson(toAdd);
+        System.out.println("Data!: " + data);
+        settings.putString(WEEKLY_MEAL_SAVE_NAME, data);
+        settings.commit();
     }
 
 
