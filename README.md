@@ -35,3 +35,12 @@ Search Results for Recipes based on frequency (how many times added) -- A value 
 References:
 http://stackoverflow.com/questions/8192683/how-to-create-an-alphabetical-scrollbar-displaying-all-the-letter-in-android
 https://github.com/woozzu/IndexableListView/blob/master/src/com/woozzu/android/widget/IndexScroller.java
+
+TODO:
+Populate Recipe data into the Meal Dialog Fragment for real data in the spinner - Includes instantiating listview w/ data methods
+
+Make add button add to a test list first and display in dialog
+
+Test list then becomes a Meal object that gets recipes added, OK button confirms and executes save data method
+
+Callback to main activity to notifyDataSetChanged
